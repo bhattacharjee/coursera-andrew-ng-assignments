@@ -1,0 +1,47 @@
+--------------------------------------------------------------------------------
+SUPERVISED LEARNING:
+--------------------------------------------------------------------------------
+Give the algorithm a dataset where the right answer is also there.
+
+Example: HOUSING PRICES
+	- Housing price to size in square feet
+This is also called REGRESSION PROBLEM
+	- predict continuous values
+
+................................................................................
+
+Example: BREAST CANCER
+	- tumor size to malignancy
+	- enhanced example, more than one feature
+		- Age + tumor size -> malignancy
+	- SUPPORT VECTOR MACHINES allow a user to deal with an INFINITE NUMBER
+	  OF FEATURES
+This is callled a CLASSIFICATION PROBLEM
+	- predicts discrete valued output
+===============================================================================
+TAKEAWAY:
+	REGRESSION	- predict continuous values
+	CLASSIFICATION	- predict discrete values
+*******************************************************************************
+*******************************************************************************
+
+--------------------------------------------------------------------------------
+UNSUPERVISED LEARNING
+--------------------------------------------------------------------------------
+Example:
+	CLUSTERING points on a graph
+		- clustering is used in google news
+		- cluster genetic data, how much individuals have a gene or not
+		- cluster machines in a network
+		- cluster people in a social network
+		- astronomical (cosmic) data analysiss
+		- market segmentation
+			- we don't know in advance what are the market segments
+			  so only unsupervised learning will work
+	COCKTAIL PARTY PROBLEM:
+		Two people talk at the same time - distinguish their individual
+		voices in the cacophony.
+		Two people talk at the same time, record the added voices using
+		two microphones at different locations.
+		Use an unsupervised learning to split the two voices.
+
