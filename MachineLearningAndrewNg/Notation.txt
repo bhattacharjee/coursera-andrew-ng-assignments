@@ -1,0 +1,3 @@
+m	number of training examples used
+x's	"input" variable/features
+y's	"output" variable/"target" variable
