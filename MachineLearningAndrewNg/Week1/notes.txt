@@ -45,3 +45,11 @@ Example:
 		two microphones at different locations.
 		Use an unsupervised learning to split the two voices.
 
+*******************************************************************************
+*******************************************************************************
+
+Training set --> Learning Algorithm --> Hypothesis (h)
+
+Linear regression with one variable is called a univariate linear regression
+
+

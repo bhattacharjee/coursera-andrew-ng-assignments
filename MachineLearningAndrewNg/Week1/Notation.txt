@@ -1,3 +1,7 @@
 m	number of training examples used
 x's	"input" variable/features
 y's	"output" variable/"target" variable
+
+(x,y)	denote a single training example
+(x^(i), y^(i))	denote the i'th training example
+
