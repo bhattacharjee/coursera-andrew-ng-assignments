@@ -1,0 +1,7 @@
+#!/usr/bin/octave -q
+
+X = [1, 2, 3; 4, 5, 6]
+Y = [2; 4]
+
+# Normal Method ( inverse(Transpose(X) * X) * transpose(X) * Y)
+pinv(X' * X) * X' * Y
