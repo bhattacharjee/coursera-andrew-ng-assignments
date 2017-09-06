@@ -21,8 +21,14 @@ figure; hold on;
 
 
 % =========================================================================
+m = size(y,1);		% Size of the vector
+pos = find(y==1);	% Find all positive values in y
+neg = find(y==0);	% Find all negative values in y
 
-
+plot(X(pos, 1), X(pos, 2),		%Way to find a sub-matrix selection
+	'k+', 'LineWidth', 2, 'MarkerSize',7, 'Color', 'red');
+plot(X(neg, 1), X(neg, 2),
+	'ko', 'LineWidth', 2, 'MarkerSize', 7, 'Color', 'green');
 
 hold off;
 
