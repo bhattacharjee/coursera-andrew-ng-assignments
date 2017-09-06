@@ -2,3 +2,8 @@ n denotes number of features
 m denotes the number of examples
 ********************************************************************************
 
+Gradient Descent: performs well when number of features is high (> 10,000)
+Normal Equation: performs well when number of features is low (< 1000)
+
+Gradient Descent: Need to choose alpha, and that requires iterations
+Normal Method: No need to choose alpha
