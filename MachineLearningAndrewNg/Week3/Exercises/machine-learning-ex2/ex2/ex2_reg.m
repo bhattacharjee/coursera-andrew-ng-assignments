@@ -26,6 +26,7 @@ clear ; close all; clc
 
 data = load('ex2data2.txt');
 X = data(:, [1, 2]); y = data(:, 3);
+savey = y;
 
 plotData(X, y);
 
@@ -129,7 +130,7 @@ legend('y = 1', 'y = 0', 'Decision boundary')
 hold off;
 
 % Compute accuracy on our training set
-p = predict(theta, X);
+p = predict(theta, X)
 
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
 fprintf('Expected accuracy (with lambda = 1): 83.1 (approx)\n');
