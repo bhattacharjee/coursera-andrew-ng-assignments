@@ -20,10 +20,10 @@ J = 0;
 %
 
 
-grad = (1/m) * (((X * theta) - y)' * X)';
-
-
 H_X = sigmoid(X * theta);
+grad = (1/m) * ((H_X - y)' * X)';
+
+
 J = (1/m) * (((-1 .* y)' * log(H_X)) - ((1 - y)' * log(1 .- H_X)));
 
 
