@@ -18,14 +18,15 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+m = size(y, 1);
 H_X = sigmoid(X * theta);
-J = (1/m) * (((-1 .* y)' * log(H_X)) - ((1 .- y)' * log(1 .- H_X))) + ((lambda * (theta' * theta)) ./ (2 * m));
+J = (1/m) * (((-1 .* y)' * log(H_X)) - ((1 .- y)' * log(1 .- H_X)))
+J = J .+ ((lambda / (2 * m))  * (theta' * theta))
 
 grad = (((H_X - y)' * X)') ./ m;
-grad_add = theta * lambda / m;
-grad_add(1) = 0;
-grad = grad + grad_add;
-
+grad_add_regularization = theta * (lambda / m);
+grad_add_regularization(1) = 0;
+grad = grad + grad_add_regularization;
 
 % =============================================================
 
