@@ -20,8 +20,9 @@ grad = zeros(size(theta));
 
 m = size(y, 1);
 H_X = sigmoid(X * theta);
-J = (1/m) * (((-1 .* y)' * log(H_X)) - ((1 .- y)' * log(1 .- H_X)))
-J = J .+ ((lambda / (2 * m))  * (theta' * theta))
+
+cost_regularization_penalty = lambda * (theta' * theta - theta(1) * theta(1)) / (2 * m);
+J = (-1 / m) * ((y' * log(H_X)) + ((1 .- y)' * log(1 .- H_X))) + cost_regularization_penalty;
 
 grad = (((H_X - y)' * X)') ./ m;
 grad_add_regularization = theta * (lambda / m);
