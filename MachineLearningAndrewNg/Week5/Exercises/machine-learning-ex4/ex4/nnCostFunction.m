@@ -61,31 +61,19 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Feed Forward %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+h1 = sigmoid([ones(m, 1) X] * Theta1');
+H = sigmoid([ones(m, 1) h1] * Theta2');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
-
-% =========================================================================
-
-% Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
-
+yy = zeros(m, num_labels);
+for i = 1:m
+    yy(i, y(i)) = 1;
 end
+
+J = -yy .* log(H) - (1 .- yy) .* log(1 .- H);
+J = 1/m * sum(sum(J));
