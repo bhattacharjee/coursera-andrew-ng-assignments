@@ -73,17 +73,12 @@ H = sigmoid([ones(m, 1) h1] * Theta2');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% COST FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-yy = zeros(m, num_labels);
-for i = 1:m
-    yy(i, y(i)) = 1;
-end
-
-J = -yy .* log(H) - (1 .- yy) .* log(1 .- H);
-J = 1/m * sum(sum(J));
-
 %[t1m, t1n] = size(Theta1);
 %[t2m, t2n] = size(Theta2);
 
+% Compute the regularization cost
+% instead of using a loop (to avoid the last column),
+% just add everything, and then subtract the last column
 theta_temp = Theta1(:,1);
 regularizationCost = sum(sum(Theta1 .* Theta1)) - ...
 			sum(sum(theta_temp .* theta_temp));
@@ -92,4 +87,14 @@ regularizationCost = regularizationCost + sum(sum(Theta2 .* Theta2)) - ...
 			sum(sum(theta_temp .* theta_temp));
 regularizationCost = (lambda / (2 * m)) * regularizationCost;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% CONVERT y FROM A NUMBER TO n OUTPUT LINES %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+yy = zeros(m, num_labels);
+for i = 1:m
+    yy(i, y(i)) = 1;
+end
+
+J = -yy .* log(H) - (1 .- yy) .* log(1 .- H);
+J = 1/m * sum(sum(J));
 J = J + regularizationCost;
