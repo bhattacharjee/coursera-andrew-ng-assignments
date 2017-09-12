@@ -123,10 +123,13 @@ for i = 1:m
     theta1 = theta1 .+ (d2 * a1);	% 25 x 400
 end
 
+theta2 = theta2 / m;
+theta1 = theta1 / m;
+
 theta1 = [zeros(size(theta1,1),1) theta1];
 theta2 = [zeros(size(theta2,1),1) theta2];
-Theta1_grad = (lambda / m) * theta1;
-Theta2_grad = (lambda / m) * theta2;
+Theta1_grad = (lambda / m) * Theta1 + theta1;
+Theta2_grad = (lambda / m) * Theta2 + theta2;
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 end
 
