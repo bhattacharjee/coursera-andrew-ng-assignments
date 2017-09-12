@@ -129,6 +129,14 @@ theta1 = theta1 / m;
 
 Theta1_grad = theta1;
 Theta2_grad = theta2;
+
+theta1 = Theta1(:,2:size(Theta1,2));%25*400
+theta2 = Theta2(:,2:size(Theta2,2)); %10*25
+theta1 = [zeros(size(theta1,1),1),theta1];
+theta2 = [zeros(size(theta2,1),1),theta2];
+
+Theta1_grad = Theta1_grad + (lambda / m) * theta1;
+Theta2_grad = Theta2_grad + (lambda / m) * theta2;
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 end
 
