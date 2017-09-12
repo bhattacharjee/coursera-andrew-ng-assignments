@@ -104,39 +104,24 @@ J = J + regularizationCost;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Theta1				  25 x 401
 % Theta2				  10 x 26
-theta1 = zeros(size(Theta1));		% 25 x 401
-theta2 = zeros(size(Theta2));		% 10 x 26
-for i = 1:m
-    x_i = X(i,:);			% 1 x 400
-    y_i = yy(i,:);			% 1 x 10
+a1 = [ones(size(X,1),1) X];		% 5000 x 401
+z2 = a1 * Theta1';			% 5000 x 25
+a2 = [ones(size(z2,1),1) sigmoid(z2)];	% 5000 x 26
+z3 = a2 * Theta2';			% 5000 x 10
+a3 = sigmoid(z3);			% 5000 x 10
 
-    a1 = [1 x_i];			% 1 x 401
-
-    z2 = Theta1 * a1';			% 25 x 1
-    a2 = [1; sigmoid(z2)];		% 26 x 1
-    z3 = Theta2 * a2; 			% 10 x 1
-    a3 = sigmoid(z3);			% 10 x 1
-
-    d3 = a3' - y_i;			% 1 x 10
-    d2 = (Theta2' * d3') .* [1; sigmoidGradient(z2)];	% 26 x 1
-    
-    theta2 = theta2 .+ (d3' * a2');	% 10 x 25
-    theta1 = theta1 .+ (d2 * a1)(2:end,:);	% 25 x 400
-end
-
-theta2 = theta2 / m;
-theta1 = theta1 / m;
-
-Theta1_grad = theta1;
-Theta2_grad = theta2;
+d3 = a3 - yy;				% 5000 x 10
+d2 = (d3 * Theta2) .* [ones(size(z2,1),1) sigmoidGradient(z2)];	% 5000 x 26
 
 theta1 = Theta1(:,2:size(Theta1,2));%25*400
-theta2 = Theta2(:,2:size(Theta2,2)); %10*25
 theta1 = [zeros(size(theta1,1),1),theta1];
-theta2 = [zeros(size(theta2,1),1),theta2];
-
+Theta1_grad = (a1' * d2)';				% 26 x 401
+Theta1_grad = 1/m * Theta1_grad(2:end, :);
 Theta1_grad = Theta1_grad + (lambda / m) * theta1;
-Theta2_grad = Theta2_grad + (lambda / m) * theta2;
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
-end
 
+theta2 = Theta2(:,2:size(Theta2,2)); %10*25
+theta2 = [zeros(size(theta2,1),1),theta2];
+Theta2_grad = 1/m * (a2' * d3)';			% 10 x 26
+Theta2_grad = Theta2_grad + (lambda / m) * theta2;
+
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
