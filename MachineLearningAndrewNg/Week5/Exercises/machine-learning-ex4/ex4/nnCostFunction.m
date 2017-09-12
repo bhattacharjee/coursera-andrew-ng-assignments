@@ -81,4 +81,15 @@ end
 J = -yy .* log(H) - (1 .- yy) .* log(1 .- H);
 J = 1/m * sum(sum(J));
 
+%[t1m, t1n] = size(Theta1);
+%[t2m, t2n] = size(Theta2);
 
+theta_temp = Theta1(:,1);
+regularizationCost = sum(sum(Theta1 .* Theta1)) - ...
+			sum(sum(theta_temp .* theta_temp));
+theta_temp = Theta2(:,1);
+regularizationCost = regularizationCost + sum(sum(Theta2 .* Theta2)) - ...
+			sum(sum(theta_temp .* theta_temp));
+regularizationCost = (lambda / (2 * m)) * regularizationCost;
+
+J = J + regularizationCost;
