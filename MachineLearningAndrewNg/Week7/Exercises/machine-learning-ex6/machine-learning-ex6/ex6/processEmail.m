@@ -99,9 +99,11 @@ while ~isempty(email_contents)
 
 
 
-
-
-
+    for ii = 1:size(vocabList,1)
+        if 1 == strcmpi(str, vocabList{ii})
+    	    word_indices = [word_indices; ii]
+	end
+    end
 
 
 

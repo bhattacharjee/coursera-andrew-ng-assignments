@@ -24,10 +24,35 @@ sigma = 0.3;
 %
 
 
+step = 3 + 1/3;
+num_steps = 10;
+C_array = [0.01 0.03 0.1 0.3 1 3 10 30];
+sigma_array = C_array;
+num_steps = size(sigma_array, 2);
 
 
 
+error_min = 9*10^6;
+C_min = 0;
+sigma_min = 0;
 
+for i = 1:num_steps
+    for j = 1:num_steps
+	model= svmTrain(X, y, C_array(i), @(x1, x2) gaussianKernel(x1, x2, sigma_array(j)));
+	predict = svmPredict(model, Xval);
+	err = mean(double(predict ~= yval));
+	fprintf("Executing loop (%d:%d)\n", i, j);
+	fprintf("Minimum_error = %f error = %f\n", error_min, err);
+	if (err < error_min)
+    	    C_min = C_array(i);
+	    sigma_min = sigma_array(j);
+	    error_min = err
+	end
+    end
+end
+
+C = C_min;
+sigma = sigma_min;
 
 % =========================================================================
 
