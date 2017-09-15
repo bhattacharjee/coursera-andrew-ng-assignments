@@ -8,6 +8,9 @@ function idx = findClosestCentroids(X, centroids)
 % Set K
 K = size(centroids, 1);
 
+m = size(X, 1);
+n = size(X, 2);
+
 % You need to return the following variables correctly.
 idx = zeros(size(X,1), 1);
 
@@ -21,12 +24,14 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
-
+X_k_distance = zeros(m, K);
+for k = 1:K
+    temp = X .- centroids(k,:);
+    temp = temp .* temp;
+    temp = sum(temp,2);
+    X_k_distance(:,k) = temp;
+end
+[dummy idx] = min(X_k_distance, [], 2);
 % =============================================================
 
 end

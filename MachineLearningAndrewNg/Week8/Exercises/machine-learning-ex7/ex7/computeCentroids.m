@@ -27,10 +27,13 @@ centroids = zeros(K, n);
 %
 
 
+m = size(X, 1);
+n = size(X, 2);
 
-
-
-
+for k = 1:K
+    X_i = X(find(idx == k), :);
+    centroids(k, :) = mean(X_i);
+end
 
 
 % =============================================================
