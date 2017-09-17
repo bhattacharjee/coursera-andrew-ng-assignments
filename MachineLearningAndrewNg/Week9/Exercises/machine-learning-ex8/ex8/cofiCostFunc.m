@@ -54,14 +54,19 @@ Theta_grad = zeros(size(Theta));
 J = X * Theta' - Y;
 J = J .* J;
 J = 1/2 * sum(sum(J .* R));
+J = J + (lambda * sum(sum(X .* X)))/2;
+J = J + (lambda * sum(sum(Theta .* Theta)))/2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 temp = X * Theta' - Y;
 temp = temp .* R;
 
 X_grad = temp * Theta;
+X_grad = X_grad + lambda .* X;
+
 
 Theta_grad = temp' * X;
+Theta_grad = Theta_grad + lambda .* Theta;
 
 
 % =============================================================
